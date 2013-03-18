@@ -1,0 +1,70 @@
+//Check gmp
+include "std/felix/pkgtool";
+open PkgTool;
+include "GMP/gmp";
+open Gmp;
+syntax gmp_syntax {
+  x[ssetunion_pri] := x[ssetunion_pri] "/\" x[>ssetunion_pri] =># "`(ast_apply ,_sr (lcm (,_1 ,_3)))" note "lcm";
+  x[ssetintersection_pri] := x[ssetintersection_pri] "\/" x[>ssetintersection_pri] =># "`(ast_apply ,_sr (gcd (,_1 ,_3)))" note "gcd";
+}
+open syntax gmp_syntax;
+//"
+{
+  val x:mpz = mpz_of_int 99;
+  val y:mpz = mpz_of_int 7;
+  val z:mpz = mpz_of_int 99;
+  assert_true(x == mpz_of_int 99 and y == (mpz_of_int 7),"testing mpz_of_int ==");
+  assert_true((x + y) == mpz_of_int  106,"testing mpz_of_int + ");
+  assert_true((x - y) == mpz_of_int  92, "testing mpz_of_int - ");
+  assert_true((x * y) == mpz_of_int  693, "testing mpz_of_int * ");
+  assert_true((x / y) == mpz_of_int 14, "testing mpz_of_int / ");
+  assert_true((x % y) == mpz_of_int 1, "testing mpz_of_int/ ");
+
+  assert_true(not (x == y), "testing equality mpz_of_int ");
+  assert_true(x != y, "testing inequality mpz_of_int ");
+  assert_true(not x < y, "testing < mpz_of_int ");
+  assert_true(not x <= y, "testing <= mpz_of_int ");
+  assert_true(x > y, "testing > mpz_of_int ");
+  assert_true(x >= y, "testing >= mpz_of_int ");
+
+  assert_true(lcm(x,y) == mpz_of_int 693, "testing mpz_of_int lcm ");
+  assert_true(gcd(x,y) == mpz_of_int 1, "testing gcd mpz_of_int ");
+  assert_true((x /\ y) == mpz_of_int 693, "testing /\ mpz_of_int ");
+  assert_true((x \/ y) == mpz_of_int 1, "testing \/ mpz_of_int ");
+};
+{
+  val x:mpq = mpq_of_int 99;
+  val y:mpq = mpq_of_int 7;
+  assert_true(x == mpq_of_int 99 and y == mpq_of_int 7,"testing mpq_of_int ==");
+  assert_true((x + y) == mpq_of_int 106,"testing mpq_of_int + ");
+  assert_true((x - y) == mpq_of_int 92, "testing mpq_of_int - ");
+  assert_true((x * y) == mpq_of_int 693, "testing mpq_of_int * ");
+  
+  assert_true(str(x / y) == "99/7", "testing mpq_of_int / ");
+
+  assert_true(not (x == y), "testing equality mpq_of_int ");
+  assert_true(x != y, "testing inequality mpq_of_int ");
+  assert_true(not x < y, "testing < mpq_of_int ");
+  assert_true(not x <= y, "testing <= mpq_of_int ");
+  assert_true(x > y, "testing > mpq_of_int ");
+  assert_true(x >= y, "testing >= mpq_of_int ");
+
+};
+{
+  val x:mpf = mpf_of_double 99.0;
+  val y:mpf = mpf_of_double 7.0;
+/*  assert_true(x == mpf_of_double  .99e2 and y == .mpf_of_double 7e1,"testing mpq_of_int ==");
+  assert_true((x + y) == mpf_of_double .106e3,"testing mpq_of_int + ");
+  assert_true((x - y) == mpf_of_double .92e2, "testing mpq_of_int - ");
+  assert_true((x * y) == mpf_of_double .693e3, "testing mpq_of_int * ");
+  assert_true((x / y) == mpf_of_double .141428571428571428571e2, "testing mpq_of_int / ");
+
+  assert_true(not (x == y), "testing equality mpq_of_int ");
+  assert_true(x != y, "testing inequality mpq_of_int ");
+  assert_true(not x < y, "testing < mpq_of_int ");
+  assert_true(not x <= y, "testing <= mpq_of_int ");
+  assert_true(x > y, "testing > mpq_of_int ");
+  assert_true(x >= y, "testing >= mpq_of_int ");
+*/  
+};
+

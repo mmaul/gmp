@@ -1,0 +1,26 @@
+include "std/felix/pkgtool";
+//$ Preforms build tasks in a way an Lib might like them done
+BUILD_LIKE = Lib;
+ 
+open PkgTool;
+open Filename;
+//$ By default setup will statically compile each .flx file in the bin dir
+//$ if you need to do something special in each phase, create an proc instance
+//$ for that phase. phases are build, test, install and clean.
+//$ You will probably want to call default_<phase> at the end of your instace
+//$ if you still want to default behavior to be preformed in addition to
+//$ your special sauce.
+
+instance PkgTool {
+
+  proc build () {
+    task("Custom build for " + NAME);
+    create_config("gmp",list("gmpxx.h","gmp.h"),
+                  list("libgmp"+#Config::config.EXT_SHLIB,
+		  "libgmpxx"+#Config::config.EXT_SHLIB),Empty[string]);
+    default_build();
+  }
+
+}
+
+SetupTool::run();
