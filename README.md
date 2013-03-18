@@ -1,4 +1,4 @@
-NAME: GMP
+NAME: gmp
 
 VERSION: .01  
 
