@@ -23,7 +23,12 @@ Quickstart SetupTool application template for a generic library.
 
     scoop get gmp
     scoop build gmp
+if building as root or installation directory is write-able by you
+
     scoop install gmp
+Otherwise ( Installs what you just built as you not what root would rebuild )
+     su # or sudo -s
+     scoop install gmp --litterbox=/home/<your username>/.felix/litterbox
 
 ## Documentation ##
 See GMP/gmp.flx
