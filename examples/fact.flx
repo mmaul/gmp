@@ -1,0 +1,13 @@
+    include "GMP/gmp";
+    open Gmp;
+    fun fact(n:int) = {
+      var p = mpz_of_int n;
+      for var i in 1 upto (n - 1) do
+        p = p * mpz_of_int i;
+      done
+      return p;
+    }
+    match System::args() with
+    |Cons(_,Cons(?n,_)) => println$ n + "! = " + str(fact(int(n)));
+    |_ => println$ "fact <n>";
+    endmatch;
